@@ -12,7 +12,6 @@
     transition: all 0.3s ease-out;
 }
 
-
 @media (min-width: 600px) {
     .Modal {
         width: 500px;

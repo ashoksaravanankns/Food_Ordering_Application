@@ -6,8 +6,8 @@ import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import axios from '../../axios-orders';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import axios from '../../axios-orders';
 
 const INGREDIENT_PRICES = {
 	salad: 0.5,
@@ -25,7 +25,9 @@ class BurgerBuilder extends Component {
 		loading: false,
 		error: false
 	};
+
 	componentDidMount() {
+		console.log(this.props);
 		axios
 			.get('https://food-order-application-8958b.firebaseio.com/ingredients.json')
 			.then((response) => {
@@ -87,29 +89,30 @@ class BurgerBuilder extends Component {
 	};
 
 	purchaseContinueHandler = () => {
-		this.setState({ loading: true });
-		const order = {
-			ingredients: this.state.ingredients,
-			price: this.state.totalPrice,
-			customer: {
-				name: 'Ashok',
-				address: {
-					street: 'Teststreet 1',
-					zipCode: '41351',
-					country: 'India'
-				},
-				email: 'test@test.com'
-			},
-			deliveryMethod: 'fastest'
-		};
-		axios
-			.post('/orders.json', order)
-			.then((response) => {
-				this.setState({ loading: false, purchasing: false });
-			})
-			.catch((error) => {
-				this.setState({ loading: false, purchasing: false });
-			});
+		// alert('You continue!');
+		// this.setState( { loading: true } );
+		// const order = {
+		//     ingredients: this.state.ingredients,
+		//     price: this.state.totalPrice,
+		//     customer: {
+		//         name: 'Max Schwarzmüller',
+		//         address: {
+		//             street: 'Teststreet 1',
+		//             zipCode: '41351',
+		//             country: 'Germany'
+		//         },
+		//         email: 'test@test.com'
+		//     },
+		//     deliveryMethod: 'fastest'
+		// }
+		// axios.post( '/orders.json', order )
+		//     .then( response => {
+		//         this.setState( { loading: false, purchasing: false } );
+		//     } )
+		//     .catch( error => {
+		//         this.setState( { loading: false, purchasing: false } );
+		//     } );
+		this.props.history.push('/checkout');
 	};
 
 	render() {
@@ -120,7 +123,8 @@ class BurgerBuilder extends Component {
 			disabledInfo[key] = disabledInfo[key] <= 0;
 		}
 		let orderSummary = null;
-		let burger = this.state.error ? <p>ingredients cannot be loaded </p> : <Spinner />;
+		let burger = this.state.error ? <p>Ingredients can't be loaded!</p> : <Spinner />;
+
 		if (this.state.ingredients) {
 			burger = (
 				<Aux>
@@ -147,7 +151,7 @@ class BurgerBuilder extends Component {
 		if (this.state.loading) {
 			orderSummary = <Spinner />;
 		}
-
+		// {salad: true, meat: false, ...}
 		return (
 			<Aux>
 				<Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
