@@ -155,6 +155,7 @@ class ContactData extends Component {
 				elementType={input.config.elementType}
 				elementConfig={input.config.elementConfig}
 				value={input.config.value}
+				invalid={!input.config.valid}
 				changed={(event) => this.inputChangedHandler(event, input.id)}
 			/>
 		));
