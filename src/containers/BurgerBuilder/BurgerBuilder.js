@@ -28,15 +28,15 @@ class BurgerBuilder extends Component {
 	};
 
 	componentDidMount() {
-		console.log(this.props);
-		axios
-			.get('https://food-order-application-8958b.firebaseio.com/ingredients.json')
-			.then((response) => {
-				this.setState({ ingredients: response.data });
-			})
-			.catch((error) => {
-				this.setState({ error: true });
-			});
+		// console.log(this.props);
+		// axios
+		// 	.get('https://food-order-application-8958b.firebaseio.com/ingredients.json')
+		// 	.then((response) => {
+		// 		this.setState({ ingredients: response.data });
+		// 	})
+		// 	.catch((error) => {
+		// 		this.setState({ error: true });
+		// 	});
 	}
 
 	updatePurchaseState(ingredients) {
@@ -89,20 +89,20 @@ class BurgerBuilder extends Component {
 		this.setState({ purchasing: false });
 	};
 
-	purchaseContinueHandler = () => {
-		// alert('You continue!');
+	// purchaseContinueHandler = () => {
+	// 	// alert('You continue!');
 
-		const queryParams = [];
-		for (let i in this.state.ingredients) {
-			queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
-		}
-		queryParams.push('price=' + this.state.totalPrice);
-		const queryString = queryParams.join('&');
-		this.props.history.push({
-			pathname: '/checkout',
-			search: '?' + queryString
-		});
-	};
+	// 	const queryParams = [];
+	// 	for (let i in this.state.ingredients) {
+	// 		queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
+	// 	}
+	// 	queryParams.push('price=' + this.state.totalPrice);
+	// 	const queryString = queryParams.join('&');
+	// 	this.props.history.push({
+	// 		pathname: '/checkout',
+	// 		search: '?' + queryString
+	// 	});
+	// };
 
 	render() {
 		const disabledInfo = {
@@ -158,8 +158,9 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onIngreidientAdded: (ingName) => dispatch({ type: actionTypes.ADD_INGREDIENT, ingredientsName: ingName }),
-		onIngreidientRemoved: (ingName) => dispatch({ type: actionTypes.REMOVE_INGREDIENT, ingredientsName: ingName })
+		onIngreidientAdded: (ingName) => dispatch({ type: actionTypes.ADD_INGREDIENT, ingredientName: ingName }),
+        onIngreidientRemoved: (ingName) => dispatch({ type: actionTypes.REMOVE_INGREDIENT, ingredientName: ingName }),
+        
 	};
 };
 
