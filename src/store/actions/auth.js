@@ -59,7 +59,7 @@ export const auth = (email, password, isSignUp) => {
 				console.log(response);
 				localStorage.setItem('token', response.data.idToken);
 				localStorage.setItem('expirationDate', expirationDate);
-				localStorage.setItem('usrId', response.data.localId);
+				localStorage.setItem('userId', response.data.localId);
 				dispatch(authSuccess(response.data.idToken, response.data.localId));
 				dispatch(checkAuthTime(response.data.expiresIn));
 			})
@@ -89,7 +89,7 @@ export const authCheckState = () => {
 			} else {
 				const userId = localStorage.getItem('userId');
 				dispatch(authSuccess(token, userId));
-				dispatch(checkAuthTime(expirationDate.getSeconds() - new Date().getSeconds()));
+				dispatch(checkAuthTime((expirationDate.getTime() - new Date().getTime())/1000));
 			}
 		}
 	};
