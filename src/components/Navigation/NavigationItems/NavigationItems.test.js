@@ -19,10 +19,10 @@ describe('<NavigationItems />', () => {
     it('should have to render 3 <NavigationItem /> component if authenticated', () => {
 		// wrapper = shallow(<NavigationItems isAuthenticated />);
 		wrapper.setProps({ isAuthenticated: true });
-		expect(wrapper.find(NavigationItem).toHaveLength(3);
+		expect(wrapper.find(NavigationItem)).toHaveLength(3);
 	});
 	// test for logout contains
-	it('should have to render 3 <NavigationItem /> component if authenticated and check it contains logout', () => {
+	it('should have to render 3 <NavigationItem /> component if authenticated status and check it contains logout', () => {
 		// wrapper = shallow(<NavigationItems isAuthenticated />);
 		wrapper.setProps({ isAuthenticated: true });
 		expect(wrapper.contains(<NavigationItem link="/logout" >Logout</NavigationItem>)).toEqual(true);
