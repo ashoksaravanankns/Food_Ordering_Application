@@ -22,10 +22,10 @@ export const purchaseBurgerStart = () => {
 };
 
 export const purchaseBurger = (orderData, token) => {
-	return  {
-		type:actionTypes.CHECK_PURCHASE_BURGER,
-		orderData:orderData,
-		token:token,
+	return {
+		type: actionTypes.CHECK_PURCHASE_BURGER,
+		orderData: orderData,
+		token: token
 	};
 };
 
@@ -56,9 +56,9 @@ export const fetchOrdersStart = () => {
 };
 
 export const fetchOrders = (token, userId) => {
-	return  {
-		type:actionTypes.CHECK_FETCH_ORDERS,
-		token:token,
-		userId:userId
-}
-}
+	return {
+		type: actionTypes.CHECK_FETCH_ORDERS,
+		token: token,
+		userId: userId
+	};
+};
